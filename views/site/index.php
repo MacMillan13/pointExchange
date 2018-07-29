@@ -11,13 +11,6 @@ use yii\widgets\Pjax;
 
 $this->title = 'Users';
 $this->params['breadcrumbs'][] = $this->title;
-$currentUserId = 0;
-
-function function_name($event) {
-    echo $event->data;
-}
-
-
 ?>
 <div class="user-index">
     <? if (!Yii::$app->user->isGuest){ ?>
