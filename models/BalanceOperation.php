@@ -66,17 +66,19 @@ class BalanceOperation extends \yii\db\ActiveRecord
     {
 
         if (($sentFrom['balance'] - $difference) > -1000 && $difference > 0 && (round($difference, 2) == $difference)
-            && $sentFrom['id'] !== $sentTo['id'] && $sentTo['id'] !== null)
+            && $sentFrom['id'] !== $sentTo['id'])
         {
             $db = Yii::$app->db;
             $transaction = $db->beginTransaction();
 
             try {
+                if($sentTo['id'] !== null) {
                     $sentTo->updateCounters(['balance' => $difference]);
 
                     $sentFrom->updateCounters(['balance' => -$difference]);
 
                     $transaction->commit();
+                }
             }
 
             catch(\Exception $e) {
